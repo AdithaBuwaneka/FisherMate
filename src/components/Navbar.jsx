@@ -1,14 +1,17 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';  
+import { Link, useLocation, useNavigate } from 'react-router-dom';  
 import logo from '../assets/images/logo.png';
 
 const Navibar = () => {
   const location = useLocation(); // Get the current location
+  const navigate = useNavigate(); // Get the navigate function
 
   const handleSignOut = () => {
     // Add your sign out logic here
     console.log("User signed out");
+    // Redirect to the login page after signing out
+    navigate('/');
   };
 
   return (
@@ -28,7 +31,7 @@ const Navibar = () => {
           label={<Avatar img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />}
         >
           <Dropdown.Header>
-            <span className="block text-sm">Aditha</span>
+            <span className="block text-sm">Aditha Buwaneka</span>
             <span className="block truncate text-sm font-medium">adithabuwaneka0@gmail.com</span>
           </Dropdown.Header>
           <Dropdown.Item>
