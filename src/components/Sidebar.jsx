@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiChartPie, HiShoppingBag, HiBell, HiUser, HiViewBoards, HiMenu } from "react-icons/hi";
 
+
 const Leftbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation(); // Get the current location for active link
@@ -29,7 +30,7 @@ const Leftbar = () => {
       
       {/* Sidebar container with responsive styles */}
       <div
-        className={`fixed top-16 left-0 h-full w-64 bg-blue-600 text-white transform ${
+        className={`fixed top-16 left-0 h-full w-64 bg-white text-white transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0 transition-transform duration-300 ease-in-out z-40`}
         role="navigation"
@@ -38,24 +39,36 @@ const Leftbar = () => {
         <Sidebar aria-label="Responsive Sidebar">
           <Sidebar.Items>
             <Sidebar.ItemGroup>
-              <Sidebar.Item icon={HiChartPie} active={location.pathname === "/dashboard"}>
-                <Link to="/dashboard" onClick={handleLinkClick}>Dashboard</Link>
+            <Link to="/dashboard" onClick={handleLinkClick}>
+              <Sidebar.Item icon={HiChartPie} active={location.pathname === "/dashboard"} className="hover:bg-blue-500">
+                Dashboard
               </Sidebar.Item>
-              <Sidebar.Item icon={HiViewBoards} label="Pro" labelColor="dark" active={location.pathname === "/resources"}>
-                <Link to="/resources" onClick={handleLinkClick}>Resources</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={HiBell} label="3" active={location.pathname === "/alerts"}>
-                <Link to="/alerts" onClick={handleLinkClick}>Safety Alert</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={HiShoppingBag} active={location.pathname === "/market"}>
-                <Link to="/market" onClick={handleLinkClick}>Market Access</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={HiUser} active={location.pathname === "/profile"}>
-                <Link to="/profile" onClick={handleLinkClick}>My Profile</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={HiArrowSmRight} active={location.pathname === "/settings"}>
-                <Link to="/settings" onClick={handleLinkClick}>Settings</Link>
-              </Sidebar.Item>
+              </Link>
+              <Link to="/resources" onClick={handleLinkClick}>
+                <Sidebar.Item icon={HiViewBoards} label="Pro" labelColor="dark" active={location.pathname === "/resources"} className="hover:bg-blue-500">
+                  Resources
+                </Sidebar.Item>
+              </Link>
+              <Link to="/alerts" onClick={handleLinkClick}>
+                <Sidebar.Item icon={HiBell} label="3" active={location.pathname === "/alerts"} className="hover:bg-blue-500">
+                  Safety Alert
+                </Sidebar.Item>
+              </Link>
+              <Link to="/market" onClick={handleLinkClick}>
+                <Sidebar.Item icon={HiShoppingBag} active={location.pathname === "/market"} className="hover:bg-blue-500">
+                  Market Access
+                </Sidebar.Item>
+              </Link>
+              <Link to="/profile" onClick={handleLinkClick}>
+                <Sidebar.Item icon={HiUser} active={location.pathname === "/profile"} className="hover:bg-blue-500">
+                  My Profile
+                </Sidebar.Item>
+              </Link>
+              <Link to="/settings" onClick={handleLinkClick}>
+                <Sidebar.Item icon={HiArrowSmRight} active={location.pathname === "/settings"} className="hover:bg-blue-500">
+                  Settings
+                </Sidebar.Item>
+              </Link>
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>

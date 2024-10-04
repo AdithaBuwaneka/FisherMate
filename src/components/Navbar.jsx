@@ -12,7 +12,7 @@ const Navibar = () => {
   };
 
   return (
-    <Navbar fluid rounded className="bg-blue-600 fixed top-0 left-0 right-0 z-50">
+    <Navbar fluid className="bg-blue-600 fixed top-0 left-0 right-0 z-50">
       <Navbar.Brand>
         <Link to="/" className="flex items-center pl-12 md:pl-0"> {/* Adjust padding for small screens */}
           <img src={logo} className="mr-3 h-11 sm:h-11" alt="Fishermate Logo" />
