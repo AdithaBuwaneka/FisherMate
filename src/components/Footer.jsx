@@ -11,25 +11,25 @@ const Foot = () => {
       <div className="w-full text-center">
         {/* Flexbox for layout on larger screens */}
         <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-          <Link to="/" className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
+          <Link to="/home" className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
             {/* Adjust padding for different screens */}
             <img src={logo} className="mr-3 h-11 sm:h-11" alt="Fishermate Logo - A platform for fishermen" />
             <span className="self-center whitespace-nowrap text-2xl font-semibold text-black">
-              Fishermate
+              FisherMate
             </span>
           </Link>
           {/* Footer links in a responsive layout */}
           <Footer.LinkGroup className="flex flex-wrap justify-center sm:justify-end space-x-4">
-            <Link to="/about" className="hover:text-blue-500">About</Link>
-            <Link to="/privacy-policy" className="hover:text-blue-500">Privacy Policy</Link>
-            <Link to="/licensing" className="hover:text-blue-500">Licensing</Link>
-            <Link to="/contact" className="hover:text-blue-500">Contact</Link>
+            <Link to="#" className="hover:text-blue-500">About</Link>
+            <Link to="#" className="hover:text-blue-500">Privacy Policy</Link>
+            <Link to="#" className="hover:text-blue-500">Licensing</Link>
+            <Link to="#" className="hover:text-blue-500">Contact</Link>
           </Footer.LinkGroup>
         </div>
         {/* Divider between sections */}
         <Footer.Divider className="my-2" />
         {/* Copyright section */}
-        <Footer.Copyright href="#" by="Fishermate™" year={2024} />
+        <Footer.Copyright href="#" by="FisherMate™" year={2024} />
       </div>
     </Footer>
   );

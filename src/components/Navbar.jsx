@@ -17,10 +17,10 @@ const Navibar = () => {
   return (
     <Navbar fluid className="bg-blue-600 fixed top-0 left-0 right-0 z-50">
       <Navbar.Brand>
-        <Link to="/" className="flex items-center pl-12 md:pl-0"> {/* Adjust padding for small screens */}
-          <img src={logo} className="mr-3 h-11 sm:h-11" alt="Fishermate Logo" />
+        <Link to="/home" className="flex items-center pl-12 md:pl-0"> {/* Adjust padding for small screens */}
+          <img src={logo} className="mr-3 h-11 sm:h-11" alt="FisherMate Logo" />
           <span className="self-center whitespace-nowrap text-2xl font-semibold text-white">
-            Fishermate
+            FisherMate
           </span>
         </Link>
       </Navbar.Brand>
@@ -44,17 +44,17 @@ const Navibar = () => {
       </div>
       <Navbar.Collapse>
         <Navbar.Link>
-          <Link to="/" className={`text-white ${location.pathname === '/' ? 'font-bold' : ''}`}>Home</Link>
+          <Link to="/home" className={`text-white ${location.pathname === '/' ? 'font-bold' : ''}`}>Home</Link>
         </Navbar.Link>
         
         <Navbar.Link>
           <Link to="/dashboard" className={`text-white ${location.pathname === '/dashboard' ? 'font-bold' : ''}`}>Dashboard</Link>
         </Navbar.Link>
         <Navbar.Link>
-          <Link to="/about" className={`text-white ${location.pathname === '/about' ? 'font-bold' : ''}`}>About</Link>
+          <Link to="#" className={`text-white ${location.pathname === '/about' ? 'font-bold' : ''}`}>About</Link>
         </Navbar.Link>
         <Navbar.Link>
-          <Link to="/contact" className={`text-white ${location.pathname === '/contact' ? 'font-bold' : ''}`}>Contact</Link>
+          <Link to="#" className={`text-white ${location.pathname === '/contact' ? 'font-bold' : ''}`}>Contact</Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

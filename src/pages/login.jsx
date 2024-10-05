@@ -15,7 +15,7 @@ const LoginPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className="flex items-center justify-center w-full max-w-md h-full aspect-square bg-white rounded-lg shadow-md dark:bg-gray-800 p-6">
         <form onSubmit={handleLogin} className="space-y-6 w-full">
-          <h3 className="text-xl font-medium text-gray-900 dark:text-white text-center">Sign in to Fishermate</h3>
+          <h3 className="text-xl font-medium text-gray-900 dark:text-white text-center">Sign in to FisherMate</h3>
           
           <div>
             <div className="mb-2 block">

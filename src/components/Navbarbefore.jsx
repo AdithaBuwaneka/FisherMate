@@ -10,9 +10,9 @@ const Navibar = () => {
       <Navbar.Brand>
         {/* Logo and title */}
         <Link to="/" className="flex items-center pl-2 md:pl-0">
-          <img src={logo} className="mr-3 h-11 sm:h-11" alt="Fishermate Logo" />
+          <img src={logo} className="mr-3 h-11 sm:h-11" alt="FisherMate Logo" />
           <span className="self-center whitespace-nowrap text-2xl font-semibold text-white">
-            Fishermate
+            FisherMate
           </span>
         </Link>
       </Navbar.Brand>
