@@ -1,8 +1,9 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
+  const navigate = useNavigate(); // For navigation after successful signup
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -11,8 +12,10 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSignup = (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
 
     // Basic validation
@@ -21,37 +24,81 @@ const SignupPage = () => {
       return;
     }
 
-    // Add your signup handling logic here
-    console.log('Sign up successful:', {
+    // Validate email format (basic regex)
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
+    // Optional: Validate phone number format (e.g., 123-456-7890)
+    const phonePattern = /^\d{3}\d{3}\d{4}$/;
+    if (!phonePattern.test(phoneNumber)) {
+      setErrorMessage("Please enter a valid phone number (e.g., 123-456-7890).");
+      return;
+    }
+
+    // Prepare the user data for signup
+    const userData = {
       firstName,
       lastName,
       phoneNumber,
       registrationNumber,
       email,
       password,
-    });
+    };
 
-    // Reset form fields
-    setFirstName('');
-    setLastName('');
-    setPhoneNumber('');
-    setRegistrationNumber('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-    setErrorMessage('');
+    try {
+      setLoading(true); // Start loading
+      const response = await fetch('http://localhost:9091/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Signup failed! Please try again.');
+      }
+
+      const data = await response.json();
+      setSuccessMessage("Signup successful! User ID: " + data.id);
+      setErrorMessage('');
+
+      // Reset form fields
+      setFirstName('');
+      setLastName('');
+      setPhoneNumber('');
+      setRegistrationNumber('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+
+      // Navigate to a different page after successful signup
+      navigate(''); // Replace with your desired route
+
+    } catch (error) {
+      setErrorMessage(error.message);
+      setSuccessMessage('');
+    } finally {
+      setLoading(false); // Stop loading
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className="flex items-center justify-center w-full max-w-md bg-white rounded-lg shadow-md dark:bg-gray-800 p-6">
-        <form onSubmit={handleSignup} className="space-y-4 w-full"> {/* Reduced space-y value */}
+        <form onSubmit={handleSignup} className="space-y-4 w-full">
           <h3 className="text-xl font-medium text-gray-900 dark:text-white text-center">Create an account</h3>
-          
+
           {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
-          
+          {successMessage && <p className="text-green-500 text-center">{successMessage}</p>}
+          {loading && <p className="text-blue-500 text-center">Loading...</p>}
+
           {/* First Name and Last Name */}
-          <div className="flex flex-col md:flex-row md:space-x-2"> {/* Reduced space-x value */}
+          <div className="flex flex-col md:flex-row md:space-x-2">
             <div className="w-full">
               <Label htmlFor="firstName" value="First Name" />
               <TextInput
@@ -62,7 +109,7 @@ const SignupPage = () => {
                 required
               />
             </div>
-            <div className="w-full mt-2 md:mt-0"> {/* Added margin top for mobile responsiveness */}
+            <div className="w-full mt-2 md:mt-0">
               <Label htmlFor="lastName" value="Last Name" />
               <TextInput
                 id="lastName"
@@ -75,7 +122,7 @@ const SignupPage = () => {
           </div>
 
           {/* Phone Number and Registration Number */}
-          <div className="flex flex-col md:flex-row md:space-x-2"> {/* Reduced space-x value */}
+          <div className="flex flex-col md:flex-row md:space-x-2">
             <div className="w-full">
               <Label htmlFor="phoneNumber" value="Phone Number" />
               <TextInput
@@ -84,9 +131,10 @@ const SignupPage = () => {
                 value={phoneNumber}
                 onChange={(event) => setPhoneNumber(event.target.value)}
                 required
+                disabled={loading}
               />
             </div>
-            <div className="w-full mt-2 md:mt-0"> {/* Added margin top for mobile responsiveness */}
+            <div className="w-full mt-2 md:mt-0">
               <Label htmlFor="registrationNumber" value="Registration Number" />
               <TextInput
                 id="registrationNumber"
@@ -94,6 +142,7 @@ const SignupPage = () => {
                 value={registrationNumber}
                 onChange={(event) => setRegistrationNumber(event.target.value)}
                 required
+                disabled={loading}
               />
             </div>
           </div>
@@ -107,6 +156,7 @@ const SignupPage = () => {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
+              disabled={loading}
             />
           </div>
 
@@ -119,6 +169,7 @@ const SignupPage = () => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
+              disabled={loading}
             />
           </div>
 
@@ -131,11 +182,12 @@ const SignupPage = () => {
               value={confirmPassword}
               onChange={(event) => setConfirmPassword(event.target.value)}
               required
+              disabled={loading}
             />
           </div>
 
           <div className="w-full">
-            <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-500">
+            <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-500" disabled={loading}>
               Create Account
             </Button>
           </div>
