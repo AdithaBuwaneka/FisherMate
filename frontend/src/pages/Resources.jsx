@@ -11,7 +11,7 @@ const Resources = () => {
       <div className="flex flex-grow mt-16"> {/* Main content area */}
         <Leftbar /> {/* Sidebar on larger screens */}
         <div className="flex-grow p-6 bg-gray-200 sm:ml-64 flex flex-col"> {/* Main content area */}
-          <h1 className="text-3xl font-bold">My Resources page</h1>
+          <h1 className="text-3xl font-bold">My Resources page-----</h1>
           <p>This is where your main -content will go, separate from the dashboard part and navigation part.</p>
           
         </div>
