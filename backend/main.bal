@@ -63,26 +63,39 @@ service / on new http:Listener(9091) {
             return error("Invalid email or password"); // Return error message for failed login
         }
     }
+
+    // Add this function to your Ballerina service
+    resource function get user(string id) returns User|error {
+        mongodb:Collection users = check self.userDb->getCollection("fisherman");
+        User? user = check users->findOne({id: id});
+
+        if (user is User) {
+            return user; // Return user data
+        } else {
+            return error("User not found");
+        }
+    }
+
 }
 
 // UserInput type for creating new users
-public type UserInput record {| 
-    string firstName; 
-    string lastName; 
-    string phoneNumber; 
-    string registrationNumber; 
-    string email; 
-    string password; 
+public type UserInput record {|
+    string firstName;
+    string lastName;
+    string phoneNumber;
+    string registrationNumber;
+    string email;
+    string password;
 |};
 
 // LoginInput type for user login 
-public type LoginInput record {| 
-    string email; 
-    string password; 
+public type LoginInput record {|
+    string email;
+    string password;
 |};
 
 // User type which includes a unique ID 
-public type User record {| 
-    readonly string id; 
-    *UserInput; 
+public type User record {|
+    readonly string id;
+    *UserInput;
 |};
