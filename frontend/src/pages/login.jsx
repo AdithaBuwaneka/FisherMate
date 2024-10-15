@@ -1,4 +1,4 @@
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Checkbox, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
@@ -36,6 +36,7 @@ const LoginPage = () => {
 
       const data = await response.json();
       setSuccessMessage("Login successful! Welcome!");
+      alert("Login successful! Welcome!");
       setErrorMessage("");
 
       localStorage.setItem("userId", data.id);
@@ -50,7 +51,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="flex items-center justify-center w-full max-w-md h-full aspect-square bg-white rounded-lg shadow-md dark:bg-gray-800 p-6">
+      <div className="flex items-center justify-center w-full max-w-md  aspect-square bg-white rounded-lg shadow-md dark:bg-gray-800 p-6">
         <form onSubmit={handleLogin} className="space-y-6 w-full">
           <h3 className="text-xl font-medium text-gray-900 dark:text-white text-center">Sign in to FisherMate</h3>
 
@@ -88,7 +89,7 @@ const LoginPage = () => {
               <Checkbox id="remember" />
               <Label htmlFor="remember">Remember me</Label>
             </div>
-            <Link to="/forgot-password" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
+            <Link to="#" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
               Lost Password?
             </Link>
           </div>
@@ -105,6 +106,14 @@ const LoginPage = () => {
             Not registered?&nbsp;
             <Link to="/signup" className="text-cyan-700 hover:underline dark:text-cyan-500">
               Create account
+            </Link>
+          </div>
+          <div className="text-center mt-4">
+            <Link
+              to="/"
+              className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+            >
+              Back to Homepage
             </Link>
           </div>
         </form>

@@ -65,6 +65,7 @@ const SignupPage = () => {
 
       const data = await response.json();
       setSuccessMessage("Signup successful! User ID: " + data.id);
+      alert("Signup successful!");
       setErrorMessage('');
 
       // Reset form fields
@@ -77,7 +78,7 @@ const SignupPage = () => {
       setConfirmPassword('');
 
       // Navigate to a different page after successful signup
-      navigate(''); // Replace with your desired route
+      navigate('/login'); // Replace with your desired route
 
     } catch (error) {
       setErrorMessage(error.message);
@@ -88,8 +89,8 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="flex items-center justify-center w-full max-w-md bg-white rounded-lg shadow-md dark:bg-gray-800 p-6">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 ">
+      <div className="flex items-center justify-center w-full max-w-md bg-white rounded-lg shadow-md dark:bg-gray-800 p-4 m-6">
         <form onSubmit={handleSignup} className="space-y-4 w-full">
           <h3 className="text-xl font-medium text-gray-900 dark:text-white text-center">Create an account</h3>
 
@@ -196,6 +197,15 @@ const SignupPage = () => {
             Already have an account?&nbsp;
             <Link to="/login" className="text-cyan-700 hover:underline dark:text-cyan-500">
               Sign in
+            </Link>
+          </div>
+
+          <div className="text-center mt-2">
+            <Link
+              to="/"
+              className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+            >
+              Back to Homepage
             </Link>
           </div>
         </form>
