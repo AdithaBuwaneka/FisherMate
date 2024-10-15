@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import Navibar from "../components/Navbar";
+import Navibar from "../components/Navbarbefore";
 import Leftbar from "../components/Sidebar";
 import Foot from "../components/Footer";
 import Search_icon from "../assets/images/search.png"; // Adjusted path
