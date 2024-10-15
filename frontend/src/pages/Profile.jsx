@@ -1,6 +1,8 @@
+
 import React, { useState, useRef } from 'react';
 import { FaCamera } from 'react-icons/fa'; // Importing a camera icon
 import Navibar from '../components/Navbar';
+
 import Leftbar from '../components/Sidebar';
 import Foot from '../components/Footer';
 
