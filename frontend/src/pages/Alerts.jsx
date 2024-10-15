@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Navibar from "../components/Navbar";
 import Leftbar from "../components/Sidebar";
@@ -9,6 +10,7 @@ import Cloudy from "../assets/images/cloudy.png"; // Adjusted path
 import Cloudy1 from "../assets/images/cloudy1.png"; // Adjusted path
 import HumidityIcon from "../assets/images/weather.png"; // Path for Humidity icon
 import WindIcon from "../assets/images/wind-power.png"; // Path for Wind speed icon
+
 
 const WeatherComponent = () => {
   const [weatherData, setWeatherData] = useState(null);
