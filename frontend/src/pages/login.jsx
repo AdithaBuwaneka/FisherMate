@@ -1,8 +1,10 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 const LoginPage = () => {
+  const { login } = useAuth(); // Get the login function from context
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -11,7 +13,7 @@ const LoginPage = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
+     
     // Prepare the user data for login
     const userData = {
       email,
@@ -36,11 +38,10 @@ const LoginPage = () => {
       setSuccessMessage("Login successful! Welcome!");
       setErrorMessage("");
 
-      // Store the user ID in local storage or state management (if needed)
       localStorage.setItem("userId", data.id);
+      login(); // Call the login function from context
 
-      // Navigate to home page or dashboard after successful login
-      navigate("/home"); // Change '/home' to the path of your desired route
+      navigate("/");
     } catch (error) {
       setErrorMessage(error.message);
       setSuccessMessage("");
@@ -93,7 +94,7 @@ const LoginPage = () => {
           </div>
 
           <div className="w-full">
-            <Link to="/home">
+            <Link to="/">
             <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-500">
               Log in to your account
             </Button>
