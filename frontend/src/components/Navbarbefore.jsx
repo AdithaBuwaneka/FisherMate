@@ -49,7 +49,7 @@ const Navibar = () => {
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>
         </Dropdown>
-        <Navbar.Toggle />
+      
       </div>
             </>
           ) : (

@@ -1,6 +1,6 @@
 "use client";
 import { Button, Card, Carousel } from "flowbite-react";
-import { Link } from 'react-router-dom';  
+import { Link ,useNavigate  } from 'react-router-dom';  
 import c1 from '../assets/images/c (1).png';
 import c2 from '../assets/images/c (2).png';
 import c3 from '../assets/images/c (3).png';
@@ -12,7 +12,7 @@ import 'aos/dist/aos.css';
 import KitchenIcon from '../assets/images/c (1).png';
 import InstallationIcon from '../assets/images/c (2).png';
 import MaintenanceIcon from '../assets/images/c (3).png';
-
+import { useAuth } from "../AuthContext";
 
 const Body = () => {
 
@@ -24,6 +24,16 @@ const Body = () => {
     });
   }, []);
 
+  const navigate = useNavigate(); // Get the navigate function
+
+  const handleSignOut = () => {
+    // Add your sign out logic here
+    console.log("User signed out");
+    // Redirect to the login page after signing out
+    navigate('/login');
+  };
+
+  const { isAuthenticated, } = useAuth();
   return (
     <div className="w-full mt-16"> {/* Ensure the Body component takes full width */}
       <Card className="w-full  bg-blue-100"> {/* Ensure the Card takes full width */}
@@ -36,10 +46,33 @@ const Body = () => {
             FisherMate is a platform that simplifies fishermen's operations, providing safety alerts, market access, and resource management through an easy-to-use dashboard for improved efficiency and safety.
 
             </p>
-            <div className="flex justify-center pb-3"> {/* Center button horizontally */}
-              <Link to="/dashboard">
+            <div className="flex justify-center pb-3"> 
+              {/* Center button horizontally */}
+              {isAuthenticated ? (
+                <Link to="/dashboard" onClick={handleSignOut}>
+                <Button className="bg-blue-600 text-white hover:bg-blue-400">
+        Go to Dashboard
+        <svg
+          className="-mr-1 ml-2 h-4 w-4"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </Button>
+  
+  
+  
+                </Link>
+              ):(
+                <Link to="/dashboard">
               <Button className="bg-blue-600 text-white hover:bg-blue-400">
-      Let's start
+      Get Started
       <svg
         className="-mr-1 ml-2 h-4 w-4"
         fill="currentColor"
@@ -57,6 +90,8 @@ const Body = () => {
 
 
               </Link>
+              )}
+              
                 
 
             </div>
@@ -155,30 +190,53 @@ const Body = () => {
           </p>
           {/* Updated Button Section */}
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 justify-center sm:justify-center"> {/* Center buttons */}
+          {isAuthenticated ? (
+                <Link to="/dashboard" onClick={handleSignOut}>
+                <Button className="bg-blue-600 text-white hover:bg-blue-400">
+        Go to Dashboard
+        <svg
+          className="-mr-1 ml-2 h-4 w-4"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </Button>
+  
+  
+  
+                </Link>
+              ):(
+                <Link to="/login">
+              <Button className="bg-blue-600 text-white hover:bg-blue-400">
+      Get Started
+      <svg
+        className="-mr-1 ml-2 h-4 w-4"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fillRule="evenodd"
+          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </Button>
+
+
+
+              </Link>
+              )}
+              
             <a
-              href="#"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
-            >
-              Get started
-              <svg
-                className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 5h12m0 0L9 1m4 4L9 9"
-                />
-              </svg>
-            </a>
-            <a
-              href="#"
-              className="py-3 px-5 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              
+              className="cursor-pointer py-3 px-10 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Learn more
             </a>
