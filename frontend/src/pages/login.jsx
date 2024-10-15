@@ -1,8 +1,10 @@
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Checkbox, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 const LoginPage = () => {
+  const { login } = useAuth(); // Get the login function from context
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -11,7 +13,7 @@ const LoginPage = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
+     
     // Prepare the user data for login
     const userData = {
       email,
@@ -34,13 +36,13 @@ const LoginPage = () => {
 
       const data = await response.json();
       setSuccessMessage("Login successful! Welcome!");
+      alert("Login successful! Welcome!");
       setErrorMessage("");
 
-      // Store the user ID in local storage or state management (if needed)
       localStorage.setItem("userId", data.id);
+      login(); // Call the login function from context
 
-      // Navigate to home page or dashboard after successful login
-      navigate("/home"); // Change '/home' to the path of your desired route
+      navigate("/");
     } catch (error) {
       setErrorMessage(error.message);
       setSuccessMessage("");
@@ -49,7 +51,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="flex items-center justify-center w-full max-w-md h-full aspect-square bg-white rounded-lg shadow-md dark:bg-gray-800 p-6">
+      <div className="flex items-center justify-center w-full max-w-md  aspect-square bg-white rounded-lg shadow-md dark:bg-gray-800 p-6">
         <form onSubmit={handleLogin} className="space-y-6 w-full">
           <h3 className="text-xl font-medium text-gray-900 dark:text-white text-center">Sign in to FisherMate</h3>
 
@@ -87,13 +89,13 @@ const LoginPage = () => {
               <Checkbox id="remember" />
               <Label htmlFor="remember">Remember me</Label>
             </div>
-            <Link to="/forgot-password" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
+            <Link to="#" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
               Lost Password?
             </Link>
           </div>
 
           <div className="w-full">
-            <Link to="/home">
+            <Link to="/">
             <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-500">
               Log in to your account
             </Button>
@@ -104,6 +106,14 @@ const LoginPage = () => {
             Not registered?&nbsp;
             <Link to="/signup" className="text-cyan-700 hover:underline dark:text-cyan-500">
               Create account
+            </Link>
+          </div>
+          <div className="text-center mt-4">
+            <Link
+              to="/"
+              className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+            >
+              Back to Homepage
             </Link>
           </div>
         </form>
