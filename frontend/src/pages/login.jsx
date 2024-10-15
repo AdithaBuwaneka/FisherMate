@@ -94,7 +94,7 @@ const LoginPage = () => {
           </div>
 
           <div className="w-full">
-            <Link to="/">
+            <Link to="/home">
             <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-500">
               Log in to your account
             </Button>
