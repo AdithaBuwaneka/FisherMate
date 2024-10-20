@@ -35,8 +35,8 @@ Make sure you have these installed on your local machine:
 ## 🚀 Local Setup Instructions
 ### 1. Clone the Repository
 ```bash
-git clone [your-repository-url]
-cd [repository-name]
+git clone https://github.com/AdithaBuwaneka/iwb242-code-dynamos.git
+cd iwb242-code-dynamos
 ```
 
 ### 2. Database Setup
