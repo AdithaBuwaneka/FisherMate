@@ -14,7 +14,7 @@ A comprehensive web application designed to help fishermen manage their resource
 
 - **Market Access**
   - Catch details submission
-  - Market price notifications
+  - market access via email
 
 - **Profile Management**
   - Personal information
@@ -87,9 +87,13 @@ fisherman-platform/
 No additional environment setup is required as everything runs locally.
 
 ## 🤝 Team Members
-- [Your Team Members Names]
+- Aditha Buwaneka-Team Leader
+- Samasha Hettiarachchi
+- Sakna Rajapakshe
+- Lakshan Roshana
 
 ## 📞 Contact
-[Your Contact Information]
+0760454341
 
-#InnovateWithBallerina #Ballerinalang #WSO2 #IEEESBUOM #IEEECSUOM #TERM23/24
+ #InnovateWithBallerina #Ballerinalang #WSO2 #IEEESBUOM #IEEECSUOM #TERM23/24 #Ballerina 
+#BallerinaProgramming 
