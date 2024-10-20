@@ -44,7 +44,7 @@ const Body = () => {
         <div className="flex flex-col lg:flex-row lg:space-x-6">
           <div className="lg:w-1/2 flex flex-col justify-center "> {/* Center content vertically */}
             <h5 className="text-4xl  font-bold tracking-tight text-blue-600 dark:text-white mt-5 pt-5 pb-5"> {/* Decrease margin-bottom */}
-              Fisherman Management Platform
+            Empowering Fishermen with Smart Tools
             </h5>
             <p className="font-normal text-gray-700 dark:text-gray-400 mb-6"> {/* Decrease margin-bottom */}
             FisherMate is a platform that simplifies fishermen's operations, providing safety alerts, market access, and resource management through an easy-to-use dashboard for improved efficiency and safety.
