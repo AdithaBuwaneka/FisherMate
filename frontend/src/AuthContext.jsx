@@ -1,20 +1,30 @@
-// src/AuthContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userInfo, setUserInfo] = useState(null); // Add state for user info
+  const [userInfo, setUserInfo] = useState(null);
+
+  // Load authentication state from localStorage on mount
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    const storedUserDetails = localStorage.getItem("userDetails");
+    
+    if (userId && storedUserDetails) {
+      setIsAuthenticated(true);
+      setUserInfo(JSON.parse(storedUserDetails));
+    }
+  }, []);
 
   const login = (userData) => {
     setIsAuthenticated(true);
-    setUserInfo(userData); // Store user data on login
+    setUserInfo(userData);
   };
   
   const logout = () => {
     setIsAuthenticated(false);
-    setUserInfo(null); // Clear user data on logout
+    setUserInfo(null);
   };
 
   return (

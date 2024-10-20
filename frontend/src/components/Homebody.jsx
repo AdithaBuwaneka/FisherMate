@@ -4,14 +4,18 @@ import { Link ,useNavigate  } from 'react-router-dom';
 import c1 from '../assets/images/c (1).png';
 import c2 from '../assets/images/c (2).png';
 import c3 from '../assets/images/c (3).png';
-import c4 from '../assets/images/c (4).png';
+
 import c5  from '../assets/images/c (5).png';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import KitchenIcon from '../assets/images/c (1).png';
-import InstallationIcon from '../assets/images/c (2).png';
-import MaintenanceIcon from '../assets/images/c (3).png';
+import c6 from '../assets/images/c (6).png';
+import c8 from '../assets/images/c (8).png';
+import c7 from '../assets/images/c (7).png';
+import c9 from '../assets/images/c (9).png';
+import c10 from '../assets/images/c (10).png';
+import c11 from '../assets/images/c (11).png';
+
 import { useAuth } from "../AuthContext";
 
 const Body = () => {
@@ -70,7 +74,7 @@ const Body = () => {
   
                 </Link>
               ):(
-                <Link to="/dashboard">
+                <Link to="/login">
               <Button className="bg-blue-600 text-white hover:bg-blue-400">
       Get Started
       <svg
@@ -99,10 +103,10 @@ const Body = () => {
           <div className="lg:w-1/2 h-56 sm:h-64 xl:h-80 2xl:h-96 ">
             <Carousel>
               <img src={c1} alt="Carousel slide 1" />
-              <img src={c2} alt="Carousel slide 2" />
+              <img src={c9} alt="Carousel slide 2" />
               <img src={c3} alt="Carousel slide 3" />
-              <img src={c4} alt="Carousel slide 4" />
-              <img src={c5} alt="Carousel slide 5" />
+              <img src={c10} alt="Carousel slide 4" />
+              <img src={c11} alt="Carousel slide 5" />
             </Carousel>
           </div>
         </div>
@@ -133,9 +137,9 @@ const Body = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
               {[
-                { icon: KitchenIcon, title: "Safety Alerts for Your Peace of Mind" },
-                { icon: InstallationIcon, title: "Comprehensive Resource Management" },
-                { icon: MaintenanceIcon, title: "Seamless Market Access for Your Catch" },
+                { icon: c6, title: "Safety Alerts for Your Peace of Mind" },
+                { icon: c7, title: "Comprehensive Resource Management" },
+                { icon: c8, title: "Seamless Market Access for Your Catch" },
               ].map((item, index) => (
                 <div key={index} className="text-center" data-aos="fade-up" data-aos-delay={index * 100}>
                   <img src={item.icon} alt={item.title} className="w-24 h-20 mx-auto mb-4" />

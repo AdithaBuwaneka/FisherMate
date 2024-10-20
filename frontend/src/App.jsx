@@ -1,7 +1,7 @@
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Home from './pages/Home';
-import Homebefore from './pages/Homebefore';
 import Dashboard from './pages/Dashboard';
 import Resources from './pages/Resources'; 
 import Alerts from './pages/Alerts';  
@@ -17,8 +17,7 @@ const App = () => {
             
 
             <Routes>
-                <Route path="/" element={<Homebefore />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/resources" element={<Resources />} />
                 <Route path="/alerts" element={<Alerts />} />

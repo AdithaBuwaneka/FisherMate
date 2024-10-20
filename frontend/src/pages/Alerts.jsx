@@ -1,21 +1,19 @@
-
-import React, { useState, useEffect } from "react";
-import Navibar from "../components/Navbarbefore";
+import { useState, useEffect } from "react";
+import Navibar from "../components/Navbar";
 import Leftbar from "../components/Sidebar";
 import Foot from "../components/Footer";
-import Search_icon from "../assets/images/search.png"; // Adjusted path
-import Snowy from "../assets/images/snowy.png"; // Adjusted path
-import Sun from "../assets/images/sun.png"; // Adjusted path
-import Cloudy from "../assets/images/cloudy.png"; // Adjusted path
-import Cloudy1 from "../assets/images/cloudy1.png"; // Adjusted path
-import HumidityIcon from "../assets/images/weather.png"; // Path for Humidity icon
-import WindIcon from "../assets/images/wind-power.png"; // Path for Wind speed icon
+import Search_icon from "../assets/images/search.png";
+import Snowy from "../assets/images/snowy.png";
+import Sun from "../assets/images/sun.png";
+import Cloudy from "../assets/images/cloudy.png";
+import Cloudy1 from "../assets/images/cloudy1.png";
+import HumidityIcon from "../assets/images/weather.png";
+import WindIcon from "../assets/images/wind-power.png";
 
-
-const WeatherComponent = () => {
+const WeatherComponent = ({ onFishingStatusChange }) => {
   const [weatherData, setWeatherData] = useState(null);
-  const [city, setCity] = useState(localStorage.getItem("defaultCity") || "Gampaha"); // Always load default city or Gampaha as fallback
-  const [defaultCity, setDefaultCity] = useState(localStorage.getItem("defaultCity") || "Gampaha"); // Load user's default city from localStorage
+  const [city, setCity] = useState(localStorage.getItem("defaultCity") || "Gampaha");
+  const [defaultCity, setDefaultCity] = useState(localStorage.getItem("defaultCity") || "Gampaha");
 
   const allIcons = {
     "01d": Sun,
@@ -32,6 +30,46 @@ const WeatherComponent = () => {
     "10n": Cloudy1,
     "13d": Snowy,
     "13n": Snowy,
+  };
+
+  const evaluateFishingConditions = (weather) => {
+    const isWindGood = weather.windspeed < 5;
+    const isTempGood = weather.temperature >= 10 && weather.temperature <= 30;
+    
+    const weatherCode = Object.keys(allIcons).find(
+      key => allIcons[key] === weather.icon
+    );
+    
+    const isWeatherGood = !weatherCode?.includes("13") && 
+                         !weatherCode?.includes("09") && 
+                         !weatherCode?.includes("10");  
+    
+    const isSafe = isWindGood && isTempGood && isWeatherGood;
+    
+    // Store the status in localStorage
+    localStorage.setItem("fishingStatus", isSafe ? "Safe" : "Unsafe");
+    onFishingStatusChange(isSafe ? "Safe" : "Unsafe");
+
+    if (isSafe) {
+      return {
+        suitable: true,
+        message: "Good conditions for fishing! 🎣",
+        details: "Low winds, comfortable temperature, and clear weather make it ideal for fishing.",
+        className: "bg-green-600"
+      };
+    } else {
+      let issues = [];
+      if (!isWindGood) issues.push("high winds");
+      if (!isTempGood) issues.push(weather.temperature < 10 ? "too cold" : "too hot");
+      if (!isWeatherGood) issues.push("unfavorable weather conditions");
+      
+      return {
+        suitable: false,
+        message: "Not ideal for fishing ⚠️",
+        details: `Challenging conditions due to ${issues.join(", ")}.`,
+        className: "bg-red-600"
+      };
+    }
   };
 
   const search = async (city) => {
@@ -60,14 +98,9 @@ const WeatherComponent = () => {
         location: data.name,
         icon: icon,
       });
-
-      // Save the searched city in localStorage
-      localStorage.setItem("lastCity", city);
     } catch (error) {
       console.error("Error fetching weather data:", error);
-      alert(
-        "An error occurred while fetching the weather data. Please try again."
-      );
+      alert("An error occurred while fetching the weather data. Please try again.");
     }
   };
 
@@ -77,30 +110,28 @@ const WeatherComponent = () => {
 
   const setAsDefaultCity = () => {
     setDefaultCity(city);
-    localStorage.setItem("defaultCity", city); // Save default city to localStorage
+    localStorage.setItem("defaultCity", city);
     alert(`Default city set to ${city}`);
   };
 
   const handleSetDefaultCity = () => {
     setCity(defaultCity);
-    search(defaultCity); // Search for the default city immediately
+    search(defaultCity);
   };
 
-  // Automatically fetch weather for the default city stored in localStorage (or fallback to Gampaha)
   useEffect(() => {
     search(defaultCity);
   }, [defaultCity]);
 
   return (
     <div className="flex flex-col items-center p-10 rounded-lg bg-gradient-to-r from-[#030454] to-[#00a5fd] max-w-sm mx-auto">
-      {/* Search Bar Section */}
       <div className="flex items-center gap-3">
         <input
           type="text"
           placeholder="Enter City Name"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="h-12 rounded-full pl-6 text-black bg-gray-200 w-64 text-lg outline-none "
+          className="h-12 rounded-full pl-6 text-black bg-gray-200 w-64 text-lg outline-none"
         />
         <img
           src={Search_icon}
@@ -110,15 +141,13 @@ const WeatherComponent = () => {
         />
       </div>
 
-      {/* Button to set current city as default */}
       <button
         onClick={setAsDefaultCity}
-        className="mt-4 bg-gradient-to-r from-[#0d843e] to-[#cbc805]  text-white px-3 py-2 w-full rounded-full font-medium"
+        className="mt-4 bg-gradient-to-r from-[#0d843e] to-[#cbc805] text-white px-3 py-2 w-full rounded-full font-medium"
       >
         Set as Default City
       </button>
 
-      {/* Button to use default city */}
       <button
         onClick={handleSetDefaultCity}
         className="mt-2 bg-gradient-to-r from-[#0b7e33] to-[#f1be04] text-white px-3 py-2 w-full rounded-full font-medium"
@@ -126,8 +155,7 @@ const WeatherComponent = () => {
         Use Default City ({defaultCity})
       </button>
 
-      {/* Weather Data Section */}
-      {weatherData ? (
+      {weatherData && (
         <div className="flex flex-col items-center mt-8">
           <img
             src={weatherData.icon}
@@ -145,37 +173,56 @@ const WeatherComponent = () => {
                 Humidity: {weatherData.humidity}%
               </p>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mb-4">
               <img src={WindIcon} alt="Wind Speed" className="w-6 h-6 mr-2" />
               <p className="text-white text-lg">
                 Wind Speed: {weatherData.windspeed} m/s
               </p>
             </div>
           </div>
+
+          {weatherData && (
+            <div className="w-full mt-4">
+              <div className={`p-4 rounded-lg ${evaluateFishingConditions(weatherData).className}`}>
+                <h3 className="text-white text-xl font-bold mb-2">
+                  {evaluateFishingConditions(weatherData).message}
+                </h3>
+                <p className="text-white text-sm">
+                  {evaluateFishingConditions(weatherData).details}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
 
 const Alerts = () => {
+  // Initialize state with value from localStorage
+  const [fishingStatus, setFishingStatus] = useState(
+    localStorage.getItem("fishingStatus") || "Unknown"
+  );
+
+  const handleFishingStatusChange = (status) => {
+    setFishingStatus(status);
+    localStorage.setItem("fishingStatus", status);
+  };
+
   return (
     <>
       <div className="flex flex-col h-screen">
-        {/* Full height layout */}
-        <Navibar /> {/* Navbar at the top */}
-        <div className="flex flex-grow mt-16">
-          {/* Main content area */}
-          <Leftbar /> {/* Sidebar on larger screens */}
+        <Navibar />
+        <div className="flex flex-grow mt-16 bg-gray-200">
+          <Leftbar fishingStatus={fishingStatus} />
           <div className="flex-grow p-6 bg-gray-200 sm:ml-64 flex flex-col">
-            {/* Main content area */}
-            <h1 className="text-3xl font-bold">Safety Alert Page</h1>
-            <WeatherComponent /> {/* Weather component */}
+            <h1 className="text-4xl font-extrabold">Safety Alert</h1>
+            <WeatherComponent onFishingStatusChange={handleFishingStatusChange} />
           </div>
         </div>
         <div className="mt-auto sm:ml-64">
-          {/* Footer at the bottom */}
-          <Foot /> {/* Footer */}
+          <Foot />
         </div>
       </div>
     </>
@@ -183,3 +230,4 @@ const Alerts = () => {
 };
 
 export default Alerts;
+
