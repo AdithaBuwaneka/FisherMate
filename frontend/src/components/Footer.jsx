@@ -1,7 +1,6 @@
 "use client";
 
 import { Footer } from "flowbite-react";
-import React from 'react';
 import logo from '../assets/images/logo.png';
 import { Link } from 'react-router-dom';
 

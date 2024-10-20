@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-"use client";
-import { Link } from 'react-router-dom';  
+import { useState } from 'react';
+"use client"; 
 import { Card } from "flowbite-react";
 import { Button } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";

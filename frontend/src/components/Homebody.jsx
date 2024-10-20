@@ -6,7 +6,7 @@ import c2 from '../assets/images/c (2).png';
 import c3 from '../assets/images/c (3).png';
 import c4 from '../assets/images/c (4).png';
 import c5  from '../assets/images/c (5).png';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import KitchenIcon from '../assets/images/c (1).png';

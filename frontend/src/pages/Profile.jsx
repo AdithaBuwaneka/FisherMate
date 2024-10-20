@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import  { useState, useRef, useEffect } from 'react';
 import { Camera } from 'lucide-react';
-import Navibar from '../components/Navbarbefore';
+import Navibar from '../components/Navbar';
 import Leftbar from '../components/Sidebar';
 import Foot from '../components/Footer';
 import { useAuth } from '../AuthContext';

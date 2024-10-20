@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Navibar from "../components/Navbarbefore";
+import Navibar from "../components/Navbar";
 import Leftbar from "../components/Sidebar";
 import Foot from "../components/Footer";
 import Search_icon from "../assets/images/search.png";

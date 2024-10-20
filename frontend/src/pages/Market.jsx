@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
-import Navibar from '../components/Navbarbefore';
+import Navibar from '../components/Navbar';
 import Leftbar from '../components/Sidebar';
 import Foot from '../components/Footer';
 

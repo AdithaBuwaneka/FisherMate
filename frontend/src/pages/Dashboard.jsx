@@ -1,5 +1,5 @@
-import React from 'react';
-import Navibar from '../components/Navbarbefore';
+
+import Navibar from '../components/Navbar';
 import Leftbar from '../components/Sidebar';
 import Foot from '../components/Footer';
 
