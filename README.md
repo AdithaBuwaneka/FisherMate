@@ -96,7 +96,8 @@ VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
 - Lakshan Roshana
 
 ## 📞 Contact
-0760454341
+-Phone: 0760454341
+-Email: adithabuwaneka0@gmail.com
 
 ## 📝 Third-Party API Documentation
 - OpenWeather API: https://openweathermap.org/api
