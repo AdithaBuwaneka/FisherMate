@@ -1,10 +1,11 @@
-import { Alert, Button, Checkbox, Label, TextInput } from "flowbite-react";
-import React, { useState } from "react";
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
 const LoginPage = () => {
-  const { login } = useAuth(); // Get the login function from context
+
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -14,13 +15,12 @@ const LoginPage = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
      
-    // Prepare the user data for login
     const userData = {
       email,
       password,
     };
 
-    /* try {
+    try {
       const response = await fetch("http://localhost:9091/login", {
         method: "POST",
         headers: {
@@ -35,19 +35,31 @@ const LoginPage = () => {
       }
 
       const data = await response.json();
-      setSuccessMessage("Login successful! Welcome!");
-      alert("Login successful! Welcome!");
-      setErrorMessage("");
+      
+       // Fetch user details after successful login
+      const userResponse = await fetch(`http://localhost:9091/fisherman/${data.id}`);
+      if (!userResponse.ok) {
+        throw new Error("Failed to fetch user details");
+      }
+      const userDetails = await userResponse.json(); 
 
+      setSuccessMessage("Login successful! Welcome! "+data.id);
+      alert("Login successful! Welcome!");
+      setErrorMessage("");// Store complete user data
       localStorage.setItem("userId", data.id);
-      login(); // Call the login function from context
+      localStorage.setItem("userDetails", JSON.stringify(userDetails));
+      
+      // Pass user details to login context
+      login(userDetails);
 
       navigate("/");
     } catch (error) {
       setErrorMessage(error.message);
       setSuccessMessage("");
-    } */
+    }
+
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -95,11 +107,11 @@ const LoginPage = () => {
           </div>
 
           <div className="w-full">
-            <Link to="/">
+            {/* <Link to="/"> */}
             <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-500">
               Log in to your account
             </Button>
-            </Link>
+            {/* </Link> */}
           </div>
 
           <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">

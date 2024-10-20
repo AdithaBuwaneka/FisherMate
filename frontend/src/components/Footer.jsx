@@ -11,7 +11,7 @@ const Foot = () => {
       <div className="w-full text-center">
         {/* Flexbox for layout on larger screens */}
         <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-          <Link to="/home" className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
+          <Link to="/" className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
             {/* Adjust padding for different screens */}
             <img src={logo} className="mr-3 h-11 sm:h-11" alt="Fishermate Logo - A platform for fishermen" />
             <span className="self-center whitespace-nowrap text-2xl font-semibold text-black">

@@ -70,7 +70,7 @@ const Body = () => {
   
                 </Link>
               ):(
-                <Link to="/dashboard">
+                <Link to="/login">
               <Button className="bg-blue-600 text-white hover:bg-blue-400">
       Get Started
       <svg
