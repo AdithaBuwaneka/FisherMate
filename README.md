@@ -1,4 +1,4 @@
-# Fisherman Management Platform
+#  Empowering Fishermen with Smart Tools
 
 A comprehensive web application designed to help fishermen manage their resources, monitor safety conditions, and access markets efficiently.
 
